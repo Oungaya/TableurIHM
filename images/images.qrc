@@ -10,5 +10,8 @@
         <file>open.png</file>
         <file>paste.png</file>
         <file>save.png</file>
+        <file>sortdown.png</file>
+        <file>sortup.png</file>
+        <file>sortbyleftcolumn.png</file>
     </qresource>
 </RCC>

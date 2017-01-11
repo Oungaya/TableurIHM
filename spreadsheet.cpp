@@ -4,6 +4,7 @@
 #include <QtGui>
 #include <QMessageBox>
 #include <QApplication>
+#include <QMap>
 
 Spreadsheet::Spreadsheet(QWidget *parent)
     : QTableWidget(parent)
@@ -310,19 +311,31 @@ void Spreadsheet::sortSelectedItemsReversed()
 
 void Spreadsheet::sortSelectedItemsByLeftColumn()
 {
+    QStringList first, final;
+    QMap<QString, QStringList> map;
     QList<QTableWidgetItem*> items = selectedItems();
     QTableWidgetSelectionRange range = selectedRange();
-    QStringList columnItemsValues;
-    QString itemsValues;
     foreach(QTableWidgetItem *item, items) {
-        if(item->column() == range.leftColumn()){
-            itemsValues.append(item->text());
-            //mapList.last().
-            foreach(QTableWidgetItem *item1, items) {
-                if(item->row() == item1->row()) {
-
-                }
+        if(item->column() == range.leftColumn()) {
+            first.append(item->text());
+            QStringList list;
+            foreach(QTableWidgetItem * item2, items) {
+                if(item2->row() == item->row() && item2->column() != item->column())
+                    list.append(item2->text());
             }
+            map.insert(item->text(), list);
+        }
+    }
+    qSort(first);
+    foreach(QString value, first) {
+        final.append(value);
+        final.append(map.value(value));
+    }
+    int i=0;
+    if(items.size() == final.size()) {
+        foreach(QTableWidgetItem *item, items) {
+            item->setText(final.at(i));
+            i++;
         }
     }
 }

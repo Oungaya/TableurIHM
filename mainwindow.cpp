@@ -244,15 +244,23 @@ void MainWindow::createActions()
     connect(sortSelectionAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItems);*/
 
     //Exercice additionnel
-    sortSelectionAction = new QAction(tr("&Selection"), this);
+    sortSelectionAction = new QAction(tr("&Selection sort"), this);
     sortSelectionAction->setIcon(QIcon(":/images/sortdown.png"));
     sortSelectionAction->setShortcut(tr("ctrl+J"));
     sortSelectionAction->setStatusTip(tr("Sort the specified cells"));
     connect(sortSelectionAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItems);
 
-    sortSelectionActionReversed = new QAction(tr("&Selection Reversed"), this);
+    sortSelectionActionReversed = new QAction(tr("&Reversed selection sort"), this);
+    sortSelectionActionReversed->setIcon(QIcon(":/images/sortup.png"));
+    sortSelectionActionReversed->setShortcut(tr("ctrl+k"));
     sortSelectionActionReversed->setStatusTip(tr("Reverse sort selected cells"));
     connect(sortSelectionActionReversed, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItemsReversed);
+
+    sortSelectionByLeftColumnAction = new QAction(tr("&Sort by left column"), this);
+    sortSelectionByLeftColumnAction->setShortcut(tr("ctrl+l"));
+    sortSelectionByLeftColumnAction->setIcon(QIcon(":/images/sortbyleftcolumn.png"));
+    sortSelectionByLeftColumnAction->setStatusTip(tr("Sort the selection using the left column"));
+    connect(sortSelectionByLeftColumnAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItemsByLeftColumn);
 
 
     //Exercice 1
@@ -320,6 +328,8 @@ void MainWindow::createMenus()
     sortSubMenu = editMenu->addMenu(tr("&Sort"));
     sortSubMenu->addAction(sortSelectionAction);
     sortSubMenu->addAction(sortSelectionActionReversed);
+    sortSubMenu->addAction(sortSelectionByLeftColumnAction);
+
 }
 
 void MainWindow::createToolBars()
@@ -339,6 +349,8 @@ void MainWindow::createToolBars()
 
     editToolBar->addSeparator();
     editToolBar->addAction(sortSelectionAction);
+    editToolBar->addAction(sortSelectionActionReversed);
+    editToolBar->addAction(sortSelectionByLeftColumnAction);
 
 }
 

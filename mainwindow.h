@@ -81,6 +81,7 @@ private:
     QMenu * sortSubMenu;
     QAction * sortSelectionAction;
     QAction * sortSelectionActionReversed;
+    QAction * sortSelectionByLeftColumnAction;
 
     QMenu * selectSubMenu;
     QAction * selectRowAction;
