@@ -18,7 +18,7 @@ MainWindow::MainWindow() : dialog(NULL)
     dialog = new GoToCellDialog(this);
     //connect(dialog->getUi()->okButton, QPushButton::clicked, this, MainWindow::onSearch);
     findDialog = new FindDialog(this);
-
+    sortDialog = new SortDialog(this);
     createActions();
     createMenus();
 //    createContextMenu();
@@ -86,6 +86,35 @@ void MainWindow::goToCell()
         QString str = dialog->getUi()->lineEdit->text().toUpper();
         spreadsheet->setCurrentCell(str.mid(1).toInt() - 1,
                                     str[0].unicode() - 'A');
+    }
+}
+
+void MainWindow::onSort()
+{
+    bool ok;
+    if(sortDialog->exec()) {
+        if(sortDialog->byCulumn()) {
+            int tmp = sortDialog->getText().toInt(&ok);
+            if(ok) {
+                spreadsheet->sortSelectedItemsByColumn(tmp);
+                sortDialog->setWrong("");
+            }
+            else  {
+                sortDialog->setWrong("Wrong value");
+                sortDialog->show();
+            }
+        }
+        if(sortDialog->byLine()){
+            int tmp = sortDialog->getText().toInt(&ok);
+            if(ok) {
+                spreadsheet->sortSelectedItemsByRow(tmp);
+                sortDialog->setWrong("");
+            }
+            else {
+                sortDialog->setWrong("Wrong value");
+                sortDialog->show();
+            }
+        }
     }
 }
 
@@ -263,6 +292,13 @@ void MainWindow::createActions()
     connect(sortSelectionByLeftColumnAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItemsByLeftColumn);
 
 
+    sortAction = new QAction(tr("&Sort..."), this);
+    sortAction->setIcon(QIcon(":/images/sortbyleftcolumn.png"));
+    sortAction->setShortcut(tr("ctrl+shift+S"));
+    sortAction->setStatusTip(tr("Search the selected area"));
+    connect(sortAction, &QAction::triggered, this, &MainWindow::onSort);
+
+
     //Exercice 1
     selectAllAction = new QAction(tr("&All"), this);
     selectAllAction->setStatusTip(tr("Select all cells"));
@@ -329,6 +365,7 @@ void MainWindow::createMenus()
     sortSubMenu->addAction(sortSelectionAction);
     sortSubMenu->addAction(sortSelectionActionReversed);
     sortSubMenu->addAction(sortSelectionByLeftColumnAction);
+    //sortSubMenu->addAction(sortAction);
 
 }
 
@@ -351,7 +388,7 @@ void MainWindow::createToolBars()
     editToolBar->addAction(sortSelectionAction);
     editToolBar->addAction(sortSelectionActionReversed);
     editToolBar->addAction(sortSelectionByLeftColumnAction);
-
+    //editToolBar->addAction(sortAction);
 }
 
 void MainWindow::createStatusBar()

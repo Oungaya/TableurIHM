@@ -17,17 +17,20 @@ SOURCES += main.cpp\
     cell.cpp \
     spreadsheet.cpp \
     gotocelldialog.cpp \
-    finddialog.cpp
+    finddialog.cpp \
+    sortdialog.cpp
 
 HEADERS  += mainwindow.h \
     cell.h \
     spreadsheet.h \
     gotocelldialog.h \
-    finddialog.h
+    finddialog.h \
+    sortdialog.h
 
 FORMS    += mainwindow.ui \
     gotocelldialog.ui \
-    finddialog.ui
+    finddialog.ui \
+    sortdialog.ui
 
 RESOURCES += \
     images/images.qrc

@@ -340,3 +340,96 @@ void Spreadsheet::sortSelectedItemsByLeftColumn()
     }
 }
 
+void Spreadsheet::sortSelectedItemsByLeftRow()
+{
+    QStringList first, final;
+    QMap<QString, QStringList> map;
+    QList<QTableWidgetItem*> items = selectedItems();
+    QTableWidgetSelectionRange range = selectedRange();
+    foreach(QTableWidgetItem *item, items) {
+        if(item->row() == range.topRow()) {
+            first.append(item->text());
+            QStringList list;
+            foreach(QTableWidgetItem * item2, items) {
+                if(item2->column() == item->column() && item2->row() != item->row())
+                    list.append(item2->text());
+            }
+            map.insert(item->text(), list);
+        }
+    }
+    qSort(first);
+    foreach(QString value, first) {
+        final.append(value);
+        final.append(map.value(value));
+    }
+    int i=0;
+    if(items.size() == final.size()) {
+        foreach(QTableWidgetItem *item, items) {
+            item->setText(final.at(i));
+            i++;
+        }
+    }
+}
+
+void Spreadsheet::sortSelectedItemsByColumn(int column)
+{
+    QStringList first, final;
+    QMap<QString, QStringList> map;
+    QList<QTableWidgetItem*> items = selectedItems();
+    //QTableWidgetSelectionRange range = selectedRange();
+    foreach(QTableWidgetItem *item, items) {
+        if(item->column() == column) {
+            first.append(item->text());
+            QStringList list;
+            foreach(QTableWidgetItem * item2, items) {
+                if(item2->row() == item->row() && item2->column() != item->column())
+                    list.append(item2->text());
+            }
+            map.insert(item->text(), list);
+        }
+    }
+    qSort(first);
+    foreach(QString value, first) {
+        final.append(value);
+        final.append(map.value(value));
+    }
+    int i=0;
+    if(items.size() == final.size()) {
+        foreach(QTableWidgetItem *item, items) {
+            item->setText(final.at(i));
+            i++;
+        }
+    }
+}
+
+void Spreadsheet::sortSelectedItemsByRow(int row)
+{
+    QStringList first, final;
+    QMap<QString, QStringList> map;
+    QList<QTableWidgetItem*> items = selectedItems();
+    //QTableWidgetSelectionRange range = selectedRange();
+    foreach(QTableWidgetItem *item, items) {
+        if(item->row() == row) {
+            first.append(item->text());
+            QStringList list;
+            foreach(QTableWidgetItem * item2, items) {
+                if(item2->column() == item->column() && item2->row() != item->row())
+                    list.append(item2->text());
+            }
+            map.insert(item->text(), list);
+        }
+    }
+    qSort(first);
+    foreach(QString value, first) {
+        final.append(value);
+        final.append(map.value(value));
+    }
+    int i=0;
+    if(items.size() == final.size()) {
+        foreach(QTableWidgetItem *item, items) {
+            item->setText(final.at(i));
+            i++;
+        }
+    }
+}
+

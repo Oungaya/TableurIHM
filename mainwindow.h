@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "gotocelldialog.h"
 #include "FindDialog.h"
+#include "sortdialog.h"
 
 class QAction;
 class QLabel;
@@ -30,6 +31,7 @@ private slots:
     void updateStatusBar();
     void spreadsheetModified();
     void onSearch();
+    void onSort();
 
 private:
     void createActions();
@@ -82,6 +84,7 @@ private:
     QAction * sortSelectionAction;
     QAction * sortSelectionActionReversed;
     QAction * sortSelectionByLeftColumnAction;
+    QAction * sortAction;
 
     QMenu * selectSubMenu;
     QAction * selectRowAction;
@@ -90,6 +93,7 @@ private:
 
     GoToCellDialog *dialog;
     FindDialog * findDialog;
+    SortDialog * sortDialog;
 };
 
 #endif
