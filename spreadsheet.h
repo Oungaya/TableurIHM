@@ -31,6 +31,7 @@ public slots:
     void selectRow();
     void selectColumn();
     void sortSelectedItems();
+    void sortSelectedItemsReversed();
     void sortSelectedItemsByColumn(int column);
 
 signals:

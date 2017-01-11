@@ -80,7 +80,7 @@ private:
 
     QMenu * sortSubMenu;
     QAction * sortSelectionAction;
-
+    QAction * sortSelectionActionReversed;
 
     QMenu * selectSubMenu;
     QAction * selectRowAction;

@@ -1,4 +1,4 @@
-#include "cell.h"
+ #include "cell.h"
 #include "spreadsheet.h"
 
 #include <QtGui>
@@ -277,20 +277,40 @@ void Spreadsheet::searchCell(QString textToFind)
 void Spreadsheet::sortSelectedItems()
 {
     QList<QTableWidgetItem*> items = selectedItems();
-    QTableWidgetSelectionRange range = selectedRange();
-    //le sort est pas bon, sort par valeurs
-    qSort(items.first(), items.last());
-    //replacer les contenu des cellules dans la liste
-    for(int i = range.topRow(); i < range.bottomRow(); i++) {
-        for(int j = range.leftColumn(); j < range.rightColumn(); j++) {
-            setItem(i,j, items.first());
-            items.removeFirst();
+    QStringList itemsValues;
+    foreach(QTableWidgetItem *item, items) {
+        itemsValues.append(item->text());
+    }
+    qSort(itemsValues);
+    int i=0;
+    if(items.size() == itemsValues.size()) {
+        foreach(QTableWidgetItem *item, items) {
+            item->setText(itemsValues.at(i));
+            i++;
+        }
+    }
+}
+
+void Spreadsheet::sortSelectedItemsReversed()
+{
+    QList<QTableWidgetItem*> items = selectedItems();
+    QStringList itemsValues;
+    foreach(QTableWidgetItem *item, items) {
+        itemsValues.append(item->text());
+    }
+    qSort(itemsValues);
+    int i = itemsValues.size()-1;
+    if(items.size() == itemsValues.size()) {
+        foreach(QTableWidgetItem *item, items) {
+            item->setText(itemsValues.at(i));
+            i--;
         }
     }
 }
 
 void Spreadsheet::sortSelectedItemsByColumn(int column)
 {
+    Q_UNUSED(column)
     QList<QTableWidgetItem*> items = selectedItems();
 
 }

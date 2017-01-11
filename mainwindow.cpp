@@ -243,6 +243,11 @@ void MainWindow::createActions()
     sortSelectionAction->setStatusTip(tr("Sort selected cells"));
     connect(sortSelectionAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItems);
 
+    sortSelectionActionReversed = new QAction(tr("&Selection Reversed"), this);
+    sortSelectionActionReversed->setStatusTip(tr("Reverse sort selected cells"));
+    connect(sortSelectionActionReversed, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItemsReversed);
+
+
     //Exercice 1
     selectAllAction = new QAction(tr("&All"), this);
     selectAllAction->setStatusTip(tr("Select all cells"));
@@ -307,7 +312,7 @@ void MainWindow::createMenus()
 
     sortSubMenu = editMenu->addMenu(tr("&Sort"));
     sortSubMenu->addAction(sortSelectionAction);
-
+    sortSubMenu->addAction(sortSelectionActionReversed);
 }
 
 void MainWindow::createToolBars()
