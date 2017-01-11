@@ -239,8 +239,15 @@ void MainWindow::createActions()
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
 
     //Exercice additionnel
-    sortSelectionAction = new QAction(tr("&Selection"), this);
+    /*sortSelectionAction = new QAction(tr("&Selection"), this);
     sortSelectionAction->setStatusTip(tr("Sort selected cells"));
+    connect(sortSelectionAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItems);*/
+
+    //Exercice additionnel
+    sortSelectionAction = new QAction(tr("&Selection"), this);
+    sortSelectionAction->setIcon(QIcon(":/images/sortdown.png"));
+    sortSelectionAction->setShortcut(tr("ctrl+J"));
+    sortSelectionAction->setStatusTip(tr("Sort the specified cells"));
     connect(sortSelectionAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItems);
 
     sortSelectionActionReversed = new QAction(tr("&Selection Reversed"), this);
@@ -329,6 +336,10 @@ void MainWindow::createToolBars()
     editToolBar->addSeparator();
     editToolBar->addAction(goToCellAction);
     editToolBar->addAction(findAction);
+
+    editToolBar->addSeparator();
+    editToolBar->addAction(sortSelectionAction);
+
 }
 
 void MainWindow::createStatusBar()

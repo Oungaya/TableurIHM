@@ -308,10 +308,22 @@ void Spreadsheet::sortSelectedItemsReversed()
     }
 }
 
-void Spreadsheet::sortSelectedItemsByColumn(int column)
+void Spreadsheet::sortSelectedItemsByLeftColumn()
 {
-    Q_UNUSED(column)
     QList<QTableWidgetItem*> items = selectedItems();
+    QTableWidgetSelectionRange range = selectedRange();
+    QStringList columnItemsValues;
+    QString itemsValues;
+    foreach(QTableWidgetItem *item, items) {
+        if(item->column() == range.leftColumn()){
+            itemsValues.append(item->text());
+            //mapList.last().
+            foreach(QTableWidgetItem *item1, items) {
+                if(item->row() == item1->row()) {
 
+                }
+            }
+        }
+    }
 }
 

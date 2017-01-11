@@ -32,7 +32,7 @@ public slots:
     void selectColumn();
     void sortSelectedItems();
     void sortSelectedItemsReversed();
-    void sortSelectedItemsByColumn(int column);
+    void sortSelectedItemsByLeftColumn();
 
 signals:
     void modified();
