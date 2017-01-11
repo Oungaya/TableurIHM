@@ -13,5 +13,3 @@ FindDialog::~FindDialog()
 {
     delete ui;
 }
-
-

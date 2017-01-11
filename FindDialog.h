@@ -14,7 +14,7 @@ class FindDialog : public QDialog
 
 public:
     explicit FindDialog(QWidget *parent = 0);
-    QString getText() {return ui->lineEdit_2->text();}
+    QString getText() {return ui->findLineEdit->text();}
 
     ~FindDialog();
 

@@ -78,6 +78,10 @@ private:
     QAction *autoRecalcAction;
     QAction *aboutAction;
 
+    QMenu * sortSubMenu;
+    QAction * sortSelectionAction;
+
+
     QMenu * selectSubMenu;
     QAction * selectRowAction;
     QAction * selectColumnAction;

@@ -238,6 +238,11 @@ void MainWindow::createActions()
     aboutAction->setStatusTip(tr("Show the application's About box"));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
 
+    //Exercice additionnel
+    sortSelectionAction = new QAction(tr("&Selection"), this);
+    sortSelectionAction->setStatusTip(tr("Sort selected cells"));
+    connect(sortSelectionAction, &QAction::triggered, spreadsheet, &Spreadsheet::sortSelectedItems);
+
     //Exercice 1
     selectAllAction = new QAction(tr("&All"), this);
     selectAllAction->setStatusTip(tr("Select all cells"));
@@ -299,6 +304,9 @@ void MainWindow::createMenus()
     selectSubMenu->addAction(selectRowAction);
     selectSubMenu->addAction(selectColumnAction);
     selectSubMenu->addAction(selectAllAction);
+
+    sortSubMenu = editMenu->addMenu(tr("&Sort"));
+    sortSubMenu->addAction(sortSelectionAction);
 
 }
 

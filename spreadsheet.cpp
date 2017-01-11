@@ -260,7 +260,8 @@ void Spreadsheet::searchCell(QString textToFind)
                 clearSelection();
                 setCurrentCell(i, j);
                 activateWindow();
-                selectionModel()->select(model()->index(i,j), QItemSelectionModel::Select);
+                //lastItemsSearched = this->findItems(textToFind, Qt::CaseInsensitive);
+                //selectionModel()->select(model()->index(i,j), QItemSelectionModel::Select);
             }
             j++;
         }
@@ -272,3 +273,25 @@ void Spreadsheet::searchCell(QString textToFind)
         box.exec();
     }
 }
+
+void Spreadsheet::sortSelectedItems()
+{
+    QList<QTableWidgetItem*> items = selectedItems();
+    QTableWidgetSelectionRange range = selectedRange();
+    //le sort est pas bon, sort par valeurs
+    qSort(items.first(), items.last());
+    //replacer les contenu des cellules dans la liste
+    for(int i = range.topRow(); i < range.bottomRow(); i++) {
+        for(int j = range.leftColumn(); j < range.rightColumn(); j++) {
+            setItem(i,j, items.first());
+            items.removeFirst();
+        }
+    }
+}
+
+void Spreadsheet::sortSelectedItemsByColumn(int column)
+{
+    QList<QTableWidgetItem*> items = selectedItems();
+
+}
+

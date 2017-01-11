@@ -30,6 +30,8 @@ public slots:
     void setAutoRecalculate(bool recalc);
     void selectRow();
     void selectColumn();
+    void sortSelectedItems();
+    void sortSelectedItemsByColumn(int column);
 
 signals:
     void modified();
@@ -40,6 +42,7 @@ private slots:
 private:
     enum { MagicNumber = 0x7F51C883, RowCount = 999, ColumnCount = 26 };
 
+    QList<QTableWidgetItem *> lastItemsSearched;
     Cell *cell(int row, int column) const;
     QString text(int row, int column) const;
     QString formula(int row, int column) const;
